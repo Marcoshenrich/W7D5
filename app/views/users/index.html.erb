@@ -1,6 +1,11 @@
 <header><h1>All Users</h1></header>
-
+<ul>
 <% @users.each do |user| %>
-<%= user.username %>
-<br>
+<li>
+<a href="<%=user_url(user)%>"><%= user.username %></a></li>
 <% end %>
+</ul>
+
+<a href="<%= new_post_url %>"><h3>Make a new post</h3></a>
+<a href="<%= new_sub_url %>"><h3>Make a new sub</h3></a>
+<a href="<%= subs_url %>"><h6>All Subs</h6></a>

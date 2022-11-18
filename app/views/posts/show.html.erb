@@ -1,4 +1,4 @@
-<h1><%= @post.title %> by <%= @post.author.username %></h1>
+<h1><%= @post.title %> by <a href="<%= user_url(@post.author)%>"><%= @post.author.username %></a></h1>
 <p><%= @post.content %></p>
 
 
@@ -9,3 +9,5 @@
 <li><a href="<%= sub_url(subr) %>"><%= subr.title %></a></li>
 <% end %>
 </ul>
+
+<a href="<%= subs_url %>"><h6>All Subs</h6></a>
