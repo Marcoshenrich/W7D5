@@ -10,6 +10,23 @@
   </head>
 
   <body>
+  
+  <% if logged_in? %>
+  <form action="<%= session_url %>" method="post">
+    <input type="hidden" name="_method" value="delete">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token%>">
+    <button>Sign Out</button>
+  </form>
+  <% else %>
+  <form action="<%= new_session_url %>" method="get">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token%>">
+    <button>Sign In</button>
+  </form>
+  <form action="<%= new_user_url %>" method="get">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token%>">
+    <button>Sign Up</button>
+  </form>
+  <% end %>
     <%= yield %>
   </body>
 </html>
