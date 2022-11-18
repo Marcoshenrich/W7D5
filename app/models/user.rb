@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id              :bigint           not null, primary key
+#  username        :string           not null
+#  password_digest :string           not null
+#  session_token   :string           not null
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#
 class User < ApplicationRecord
 
     validates :username, :password_digest, :session_token, presence: true
@@ -5,6 +16,18 @@ class User < ApplicationRecord
     validates :password, length:{minimum: 6}, allow_nil: true
     before_validation :ensure_session_token
     attr_reader :password
+
+    has_many :subs,
+        foreign_key: :moderator_id,
+        class_name: :Sub,
+        dependent: :destroy,
+        inverse_of: :moderator
+
+    has_many :posts,
+        foreign_key: :author_id,
+        class_name: :Post,
+        dependent: :destroy,
+        inverse_of: :author
 
 
     def self.find_by_credentials(username, password)
